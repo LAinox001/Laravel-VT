@@ -16,3 +16,19 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('salut', function () {
+    return("salut");
+});
+
+Route::group(['prefix' => 'salutation'], function(){
+
+    Route::get('salut/{slug}-{id}', function ($slug, $id) {
+        return "slug : $slug, ID : $id";
+    })->where('slug', '[a-z0-9\-]+')->where('id', '[0-9]+');
+    
+    Route::get('bonjour/{slug}-{id}', ['as' => 'bonjour', function ($slug, $id) {
+        return "Lien : " . route('bonjour', ['slug' => $slug, 'id' => $id]);
+    }])->where('slug', '[a-z0-9\-]+')->where('id', '[0-9]+');
+    
+});
