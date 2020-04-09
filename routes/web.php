@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PagesController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -32,3 +33,5 @@ Route::group(['prefix' => 'salutation', 'middleware' => 'ip'], function(){
     }])->where('slug', '[a-z0-9\-]+')->where('id', '[0-9]+');
 
 });
+
+Route::get('about', 'PagesController@about');
