@@ -7,7 +7,9 @@ use Illuminate\Http\Request;
 class PagesController extends Controller
 {
     public function about(){
-        return("j'aime la queue");
+        $title = "A propos";
+        
+        return view('pages/about', ['title' => $title]);
     }
 
 
