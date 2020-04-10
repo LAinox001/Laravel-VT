@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\LinksController;
 use App\Http\Controllers\PagesController;
 use Illuminate\Support\Facades\Route;
 
@@ -35,3 +36,9 @@ Route::group(['prefix' => 'salutation', 'middleware' => 'ip'], function(){
 });
 
 Route::get('about', 'PagesController@about');
+
+Route::get('links/create', 'LinksController@create');
+
+Route::post('links/create', 'LinksController@store');
+
+Route::get('r/{id}', 'LinksController@show')->where('id', '[0-9]+');
