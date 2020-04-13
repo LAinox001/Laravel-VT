@@ -3,8 +3,11 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use phpDocumentor\Reflection\DocBlock\Tag;
 
 class Post extends Model
 {
-    //
+    public function tags(){
+        return $this->belongsToMany(Tag::class);
+    }
 }

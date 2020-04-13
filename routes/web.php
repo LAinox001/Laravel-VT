@@ -24,7 +24,6 @@ Route::get('salut', function () {
 });
 
 Route::group(['prefix' => 'salutation', 'middleware' => 'ip'], function(){
-
     Route::get('salut/{slug}-{id}', function ($slug, $id) {
         return "slug : $slug, ID : $id";
     })->where('slug', '[a-z0-9\-]+')->where('id', '[0-9]+');
@@ -32,7 +31,6 @@ Route::group(['prefix' => 'salutation', 'middleware' => 'ip'], function(){
     Route::get('bonjour/{slug}-{id}', ['as' => 'bonjour', function ($slug, $id) {
         return "Lien : " . route('bonjour', ['slug' => $slug, 'id' => $id]);
     }])->where('slug', '[a-z0-9\-]+')->where('id', '[0-9]+');
-
 });
 
 Route::get('about', 'PagesController@about');
@@ -42,3 +40,5 @@ Route::get('links/create', 'LinksController@create');
 Route::post('links/create', 'LinksController@store');
 
 Route::get('r/{id}', 'LinksController@show')->where('id', '[0-9]+');
+
+Route::resource('posts', 'PostsController');
