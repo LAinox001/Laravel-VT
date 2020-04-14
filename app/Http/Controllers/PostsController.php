@@ -15,7 +15,9 @@ class PostsController extends Controller
     }
 
     public function index(){
-        $posts = Post::get();
+        $posts = Post::with(['category' => function($query) {
+            $query->select('name');
+        }])->get();
         return view('posts.index', compact('posts'));
     }
 

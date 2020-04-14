@@ -2,6 +2,7 @@
 
 namespace App\Forms;
 
+use App\Category;
 use App\Forms\Form;
 use phpDocumentor\Reflection\DocBlock\Tag;
 
@@ -19,15 +20,15 @@ class PostForm extends Form
             ->add('slug', 'text', [
                   'label' => 'Slug',
             ])
+            ->add('category_id', 'entity', [
+                'class' => 'App\Category',
+                'property' => 'name',
+            ])
             ->add('content', 'textarea', [
                   'label' => 'Contenu',
                   'rules' => 'required|min:5'
             ])
-            ->add('tags', 'entity', [
-                'class' => Tag::class,
-                'multiple' => true,
-                'property' => 'name'
-            ]);
+            ->add('online', 'checkbox');
         $this->add('submit', 'submit', ['label' => 'Envoyer']);
     }
 }
