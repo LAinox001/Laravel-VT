@@ -38,10 +38,11 @@ class PostsController extends Controller
         return view('posts.edit', compact('form'));
     }
 
-    public function update(Post $post){
+    public function update(Post $post, Request $request){
         $form = $this->getForm($post);
         $form->redirectIfNotValid();
         $post->save();
+        $post->tags()->sync($request->get('tags'));
         return redirect()->route('posts.index');
     }
 
