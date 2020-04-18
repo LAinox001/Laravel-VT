@@ -1,8 +1,9 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LinksController;
 use App\Http\Controllers\PagesController;
-use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,3 +43,6 @@ Route::post('links/create', 'LinksController@store');
 Route::get('r/{id}', 'LinksController@show')->where('id', '[0-9]+');
 
 Route::resource('posts', 'PostsController');
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

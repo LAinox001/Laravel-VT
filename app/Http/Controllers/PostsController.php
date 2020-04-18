@@ -43,7 +43,7 @@ class PostsController extends Controller
         $form->redirectIfNotValid();
         $post->save();
         $post->tags()->sync($request->get('tags'));
-        return redirect()->route('posts.index');
+        return redirect()->route('posts.edit', $post)->with('success', 'L\'article a bien été sauvegardé');
     }
 
     public function getForm(?Post $post = null){
