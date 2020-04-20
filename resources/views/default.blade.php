@@ -57,7 +57,7 @@
             <div class="collapse navbar-collapse" id="navbarsExampleDefault">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <router-link to="/home" class="nav-link">Accueil<span class="sr-only">(current)</span></router-link>
+                        <router-link to="/" class="nav-link">Accueil<span class="sr-only">(current)</span></router-link>
                     </li>
                     <li class="nav-item">
                         <router-link to="/tasks" class="nav-link">Listes des tâches</router-link>
