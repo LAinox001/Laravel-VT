@@ -4,7 +4,17 @@
             <div class="col-md-8">
                 <add-task @task-added="refresh"></add-task>
                 <ul class="list-group">
-                    <li class="list-group-item" v-for="task in tasks.data" :key="task.id"><a href="#">{{ task.name }}</a></li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center" v-for="task in tasks.data" :key="task.id"><a href="#">{{ task.name }}</a>
+                            <!-- Button trigger modal -->
+                            <div>
+                                <button type="button" class="btn btn-primary my-3" data-toggle="modal" data-target="#editModal"
+                                @click="getTask(task.id)">
+                                Editer la tâche
+                                </button>
+                                <button type="button" class="btn btn-danger" @click="deleteTask(task.id)">Supprimer</button>
+                            </div>
+                    </li>
+                    <edit-task v-bind:taskToEdit="taskToEdit" @task-updated="refresh"></edit-task>
                 </ul>
                 <pagination :data="tasks" @pagination-change-page="getResults" class="mt-5"></pagination>
             </div>
@@ -17,7 +27,8 @@
 
         data(){
             return{
-                tasks: {}
+                tasks: {},
+                taskToEdit: ''
             }
         },
 
@@ -35,9 +46,21 @@
                      })
             },
 
-            refresh(){
+            refresh(tasks){
                 this.tasks = tasks.data;
             },
+
+            getTask(id) {
+                axios.get('/tasks/edit/' + id)
+                     .then(response => this.taskToEdit = response.data)
+                     .catch(error => console.log(error));
+            },
+
+            deleteTask(id){
+                axios.delete('/tasks/' + id)
+                     .then(response => this.tasks = response.data)
+                     .catch(error => console.log(error));
+            }
         },
 
         mounted() {

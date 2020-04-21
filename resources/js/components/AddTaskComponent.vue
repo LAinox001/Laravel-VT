@@ -22,7 +22,7 @@
                         <textarea name="name" id="name" rows="4" class="form-control" 
                         v-model="name"></textarea>
                     </div>
-                    <button type="submit" class="btn btn-success" @click="taskStore">Créer ma tâche</button>
+                    <button type="submit" class="btn btn-success" @click="taskStore" data-dismiss="modal">Créer ma tâche</button>
                 </form>
             </div>
             </div>

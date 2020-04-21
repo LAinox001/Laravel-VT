@@ -39,8 +39,7 @@ class TaskController extends Controller
         $tasks = Task::create($request->all());
 
         if($tasks){
-            $tasks = Task::orderBy('created_at', 'DESC')->paginate(2);
-            return response()->json($tasks);
+            return $this->refresh();
         }
     }
 
@@ -63,7 +62,8 @@ class TaskController extends Controller
      */
     public function edit($id)
     {
-        //
+        $task = Task::find($id);
+        return response()->json($task);
     }
 
     /**
@@ -75,7 +75,13 @@ class TaskController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $task = Task::find($id);
+        $task->name = request('name');
+        $task->save();
+
+        if($task){
+            return $this->refresh();
+        }
     }
 
     /**
@@ -86,6 +92,16 @@ class TaskController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $task = Task::find($id);
+        if($task->delete()){
+            return $this->refresh();
+        } else {
+            return response()->json(['error' => 'Destroy has failed']);
+        }
+    }
+
+    private function refresh(){
+        $tasks = Task::orderBy('created_at', 'DESC')->paginate(2);
+        return response()->json($tasks);
     }
 }
