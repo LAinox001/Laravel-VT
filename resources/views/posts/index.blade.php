@@ -7,6 +7,8 @@
             <p><em>{{ $post->category->name }}</em></p>
         @endif
         <p>{{ $post->content }}</p>
+        @auth
         <a class="btn btn-primary" href="{{ route('posts.edit', $post) }}">Editer</a>
+        @endauth
     @endforeach
 @stop

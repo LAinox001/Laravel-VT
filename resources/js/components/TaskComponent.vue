@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="container" v-if="show==true">
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <add-task @task-added="refresh"></add-task>
@@ -28,8 +28,14 @@
         data(){
             return{
                 tasks: {},
-                taskToEdit: ''
+                taskToEdit: '',
+                show: true
             }
+        },
+
+        mounted() {
+            console.log('TaskComponent mounted.');
+            this.checkUrl();
         },
 
         created(){
@@ -60,11 +66,21 @@
                 axios.delete('/tasks/' + id)
                      .then(response => this.tasks = response.data)
                      .catch(error => console.log(error));
+            },
+
+            checkUrl(){
+                var currentUrl = window.location.pathname;
+                console.log(currentUrl);
+                // var regex = '/[0-9]+/';
+                if(currentUrl == '/posts'){
+                    this.show = false;
+                    console.log(show);
+                }
+                else{
+                    this.show = true;
+                    console.log(show);
+                }
             }
         },
-
-        mounted() {
-            console.log('Component mounted.')
-        }
     }
 </script>

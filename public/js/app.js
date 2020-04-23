@@ -2035,10 +2035,30 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      show: true
+    };
+  },
   mounted: function mounted() {
-    console.log('Component mounted.');
+    console.log('HomeComponent mounted.');
+    this.checkUrl();
+  },
+  methods: {
+    checkUrl: function checkUrl() {
+      var currentUrl = window.location.pathname;
+      console.log(currentUrl); // var regex = '/[0-9]+/';
+
+      if (currentUrl == '/posts') {
+        this.show = false;
+        console.log(show);
+      } else {
+        this.show = true;
+        console.log(show);
+      }
+    }
   }
-});
+}); // || '/posts/edit' . regex
 
 /***/ }),
 
@@ -2079,8 +2099,13 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       tasks: {},
-      taskToEdit: ''
+      taskToEdit: '',
+      show: true
     };
+  },
+  mounted: function mounted() {
+    console.log('TaskComponent mounted.');
+    this.checkUrl();
   },
   created: function created() {
     var _this = this;
@@ -2120,10 +2145,19 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (error) {
         return console.log(error);
       });
+    },
+    checkUrl: function checkUrl() {
+      var currentUrl = window.location.pathname;
+      console.log(currentUrl); // var regex = '/[0-9]+/';
+
+      if (currentUrl == '/posts') {
+        this.show = false;
+        console.log(show);
+      } else {
+        this.show = true;
+        console.log(show);
+      }
     }
-  },
-  mounted: function mounted() {
-    console.log('Component mounted.');
   }
 });
 
@@ -38613,18 +38647,18 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _vm.show == true
+    ? _c("div", { staticClass: "container" }, [
+        _c("h1", [
+          _vm._v(
+            "Bienvenue sur notre site test de Laravel et Vue.JS " +
+              _vm._s(_vm.show)
+          )
+        ])
+      ])
+    : _vm._e()
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "container" }, [
-      _c("h1", [_vm._v("Bienvenue sur notre site test de Laravel et Vue.JS")])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -38646,90 +38680,92 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "container" }, [
-    _c("div", { staticClass: "row justify-content-center" }, [
-      _c(
-        "div",
-        { staticClass: "col-md-8" },
-        [
-          _c("add-task", { on: { "task-added": _vm.refresh } }),
-          _vm._v(" "),
+  return _vm.show == true
+    ? _c("div", { staticClass: "container" }, [
+        _c("div", { staticClass: "row justify-content-center" }, [
           _c(
-            "ul",
-            { staticClass: "list-group" },
+            "div",
+            { staticClass: "col-md-8" },
             [
-              _vm._l(_vm.tasks.data, function(task) {
-                return _c(
-                  "li",
-                  {
-                    key: task.id,
-                    staticClass:
-                      "list-group-item d-flex justify-content-between align-items-center"
-                  },
-                  [
-                    _c("a", { attrs: { href: "#" } }, [
-                      _vm._v(_vm._s(task.name))
-                    ]),
-                    _vm._v(" "),
-                    _c("div", [
-                      _c(
-                        "button",
-                        {
-                          staticClass: "btn btn-primary my-3",
-                          attrs: {
-                            type: "button",
-                            "data-toggle": "modal",
-                            "data-target": "#editModal"
-                          },
-                          on: {
-                            click: function($event) {
-                              return _vm.getTask(task.id)
-                            }
-                          }
-                        },
-                        [
-                          _vm._v(
-                            "\n                            Editer la tâche\n                            "
-                          )
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "button",
-                        {
-                          staticClass: "btn btn-danger",
-                          attrs: { type: "button" },
-                          on: {
-                            click: function($event) {
-                              return _vm.deleteTask(task.id)
-                            }
-                          }
-                        },
-                        [_vm._v("Supprimer")]
-                      )
-                    ])
-                  ]
-                )
-              }),
+              _c("add-task", { on: { "task-added": _vm.refresh } }),
               _vm._v(" "),
-              _c("edit-task", {
-                attrs: { taskToEdit: _vm.taskToEdit },
-                on: { "task-updated": _vm.refresh }
+              _c(
+                "ul",
+                { staticClass: "list-group" },
+                [
+                  _vm._l(_vm.tasks.data, function(task) {
+                    return _c(
+                      "li",
+                      {
+                        key: task.id,
+                        staticClass:
+                          "list-group-item d-flex justify-content-between align-items-center"
+                      },
+                      [
+                        _c("a", { attrs: { href: "#" } }, [
+                          _vm._v(_vm._s(task.name))
+                        ]),
+                        _vm._v(" "),
+                        _c("div", [
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-primary my-3",
+                              attrs: {
+                                type: "button",
+                                "data-toggle": "modal",
+                                "data-target": "#editModal"
+                              },
+                              on: {
+                                click: function($event) {
+                                  return _vm.getTask(task.id)
+                                }
+                              }
+                            },
+                            [
+                              _vm._v(
+                                "\n                            Editer la tâche\n                            "
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-danger",
+                              attrs: { type: "button" },
+                              on: {
+                                click: function($event) {
+                                  return _vm.deleteTask(task.id)
+                                }
+                              }
+                            },
+                            [_vm._v("Supprimer")]
+                          )
+                        ])
+                      ]
+                    )
+                  }),
+                  _vm._v(" "),
+                  _c("edit-task", {
+                    attrs: { taskToEdit: _vm.taskToEdit },
+                    on: { "task-updated": _vm.refresh }
+                  })
+                ],
+                2
+              ),
+              _vm._v(" "),
+              _c("pagination", {
+                staticClass: "mt-5",
+                attrs: { data: _vm.tasks },
+                on: { "pagination-change-page": _vm.getResults }
               })
             ],
-            2
-          ),
-          _vm._v(" "),
-          _c("pagination", {
-            staticClass: "mt-5",
-            attrs: { data: _vm.tasks },
-            on: { "pagination-change-page": _vm.getResults }
-          })
-        ],
-        1
-      )
-    ])
-  ])
+            1
+          )
+        ])
+      ])
+    : _vm._e()
 }
 var staticRenderFns = []
 render._withStripped = true

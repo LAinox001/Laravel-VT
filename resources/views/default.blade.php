@@ -72,6 +72,7 @@
                             <a class="dropdown-item" href="/register">Register</a>
                             <a class="dropdown-item" href="/posts">Nos Articles</a>
                             <a class="dropdown-item" href="/posts/create">Créer un article</a>
+                            <a class="dropdown-item" href="links/create">Créer un URL</a>
                         </div>
                     </li>
                 </ul>

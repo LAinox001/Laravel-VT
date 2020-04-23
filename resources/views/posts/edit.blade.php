@@ -1,5 +1,6 @@
 @extends('default')
 
+@auth
 @include('flash')
 
 @section('content')
@@ -8,3 +9,5 @@
         {!! form($form) !!}    
     </div>
 @stop
+
+@endauth
