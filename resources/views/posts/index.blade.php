@@ -10,5 +10,6 @@
         @auth
         <a class="btn btn-primary" href="{{ route('posts.edit', $post) }}">Editer</a>
         @endauth
+        <a class="btn btn-primary" href="{{ route('posts.show', $post) }}">Lire</a>
     @endforeach
 @stop
