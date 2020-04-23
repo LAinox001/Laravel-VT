@@ -5,5 +5,6 @@
     @if($post->category)
         <p><em>{{ $post->category->name }}</em></p>
     @endif
+    <br>
     <p>{{ $post->content }}</p>
 @endsection
